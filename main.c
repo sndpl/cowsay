@@ -89,16 +89,12 @@ char *argv[];
           exit(1);
     }
   }
-  printf("\nGet string from command line\n");
   str = getstr(optind, argc, argv, &cow);
   lines = 0;
   maxline = 0;
-  printf("\nCount string\n");
   strcnt(str, &lines, &maxline);
 
-  printf("\nPrint string\n");
   printstring(str, lines, maxline);
-  printf("\nPrint cow\n");
   printcow(&cow);
 
   exit(0);
