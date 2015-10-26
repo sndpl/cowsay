@@ -7,7 +7,7 @@ int multiplier;
 {
   int i;
   for (i = 0; i < multiplier; i++)
-    printf(input);
+    puts(input);
 }
 
 /*
