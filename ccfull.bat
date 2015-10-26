@@ -1,23 +1,49 @@
-CF getopt
-CF opendir
-CF info
-CF string
-CF subset
-CF main
+echo Compiling getopt...
+cf getopt
+cg -k getopt
+m80 =getopt/z
 
-CG -k getopt
-CG -k opendir
-CG -k info
-CG -k string
-CG -k subset
-CG -k main
+echo
+echo Compiling opendir...
+cf opendir
+cg -k opendir
+m80 =opendir/z
 
-M80 =getopt/z
-M80 =opendir/z
-M80 =info/z
-M80 =string/z
-M80 =subset/z
-M80 =main/z
+echo
+echo Compiling info...
+cf info
+cg -k info
+m80 =info/z
 
-L80 B:\LIB\CK,main,subset,getopt,opendir,info,string,B:\lib\mlib/s,B:\LIB\CLIB/S,B:\LIB\CRUN/S,CEND,cowsay/N/Y/E:xmain
-xmain
+echo
+echo Compiling string...
+cf string
+cg -k string
+m80 =string/z
+
+echo
+echo Compiling subset...
+cf subset
+cg -k subset
+m80 =subset/z
+
+echo
+echo Creating library...
+lib80 cowlib=getopt,opendir,info,string,subset
+
+echo
+echo Compiling main...
+cf main
+cg -k main
+m80 =main/z
+
+echo
+echo Linking...
+l80 B:\lib\CK,main,cowlib,B:\lib\mlib/s,B:\lib\CLIB/S,B:\lib\CRUN/S,b:\lib\CEND,cowsay/N/Y/E:xmain
+
+echo
+echo Cleaning up...
+move *.rel build
+move *.mac build
+move *.sym build
+

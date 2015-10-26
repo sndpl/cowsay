@@ -197,4 +197,3 @@ int *maxline;
   }
   *lines = *lines + 1;
 }
-

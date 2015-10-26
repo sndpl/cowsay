@@ -1,12 +1,16 @@
+#include <stdio.h>	/* It's kind of a convention to put the
+			   system includes first */
 
 /* https://github.com/schacon/cowsay/blob/master/cowsay */
+
 #include "config.h"
 #include "main.h"
 #include "info.h"
 #include "string.h"
 #include "getopt.h"
 #include "subset.h"
-#include <stdio.h>
+
+#define DEBUG 0
 
 extern optind;
 extern optopt;
@@ -15,19 +19,19 @@ extern opterr;
 
 char *getstr(optind, argc, argv, cow);
 
-VOID init_cow(cow)
-cow_t *cow;
+VOID	init_cow(cow)
+cow_t	*cow;
 {
-  cow->eyes = DEFAULT_EYES;
-  cow->tongue = DEFAULT_TONGUE;
-  cow->thoughts = DEFAULT_THOUGHTS;
-  cow->cowfile = NULL;
-  cow->wordwrap = 40;
+	cow->eyes = DEFAULT_EYES;
+	cow->tongue = DEFAULT_TONGUE;
+	cow->thoughts = DEFAULT_THOUGHTS;
+	cow->cowfile = NULL;
+	cow->wordwrap = 40;
 }
 
-int main(argc, argv)
-int argc;
-char *argv[];
+char	main(argc, argv)
+int	argc;
+char	*argv[];
 {
   int c, lines, maxline;
   cow_t cow;
@@ -59,11 +63,14 @@ char *argv[];
         cow.eyes = YOUTHFUL_EYES;
         break;
       case 'e':
-        strcpy(cow.eyes, optarg);
-        /* cow.eyes = optarg; */
+        cow.eyes = (char *)optarg;
+        printf("-> %s\n", *cow.eyes);
+        printf("-> %-2s\n", *cow.eyes);
+        printf("-> %-2s\n", cow.eyes);
+        *cow.eyes = sprintf("%-2s", *cow.eyes);
         break;
       case 'T':
-        strcpy(cow.tongue, optarg);
+        cow.tongue = (char *)optarg;
         break;
       case 'W':
         cow.wordwrap = (int)optarg;
@@ -72,7 +79,10 @@ char *argv[];
         cow.wordwrap = -1;
         break;
       case 'f':
-        strcpy(cow.cowfile, optarg);
+/* BIG PROBLEM HERE. cow.cowfile is a pointer (two bytes). If you copy the
+   string argument into it then you're going to destroy the data structure */
+/*        strcpy(cow.cowfile, optarg); *** */
+	      cow.cowfile = (char *)optarg;
         break;
       case 'l':
           listcowfiles();

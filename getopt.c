@@ -61,7 +61,4 @@ char *opts;
   }
   return(c);
 }
-
-
-
 

@@ -27,4 +27,3 @@
 #define  YOUTHFUL_EYES    ".."
 
 #define  DEAD_TONGUE      "U"
-
