@@ -43,6 +43,9 @@ l80 B:\lib\CK,main,cowlib,B:\lib\mlib/s,B:\lib\CLIB/S,B:\lib\CRUN/S,b:\lib\CEND,
 
 echo
 echo Cleaning up...
+del build\*.rel
+del build\*.mac
+del build\*.sym
 move *.rel build
 move *.mac build
 move *.sym build

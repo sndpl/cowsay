@@ -56,38 +56,17 @@ Example (the default cow, you can see him at the start of the Readme):
 
 # Developer notes #
 
-To compile the source code, use the following commands:
-
-```
-CF getopt
-CF opendir
-CF info
-CF string
-CF subset
-CF main
-
-CG -k getopt
-CG -k opendir
-CG -k info
-CG -k string
-CG -k subset
-CG -k main
-
-M80 =getopt/z
-M80 =opendir/z
-M80 =info/z
-M80 =string/z
-M80 =subset/z
-M80 =main/z
-
-L80 B:\LIB\CK,main,subset,getopt,opendir,info,string,B:\lib\mlib/s,B:\LIB\CLIB/S,B:\LIB\CRUN/S,CEND,cowsay/N/Y/E:xmain
-xmain
-
-```
-
-The best way is to copy the CK, MLIB, CLIB, CRUN, CEND rel files to this directory and update the L80 line (because it may not be longer then 127 chars!).
+To compile the source code, use the ```ccfull.bat``` batch file. Don't forget to edit the batch file for the standard C libraries, beware that this line can't be longer then 127 chars!
 
 ## TODO ##
 
-- Update the Compile script by creating a cowsay library first with M80 and use this library with the L80 command.
 - Fix bugs :)
+
+
+# Links #
+* [Relearning MSX](http://www.lavandeira.net/relearning-msx/)  
+Greate series of blog posts written by Javier Lavandeira to setup your MSX-C environment and start learning MSX-C.
+* [Generation MSX](http://www.generation-msx.nl)  
+Large MSX Software database.
+* [MSX Resource Center](http://www.msx.org)  
+All the MSX News you need!
