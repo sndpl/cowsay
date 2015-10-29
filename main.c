@@ -1,5 +1,5 @@
-#include <stdio.h>	/* It's kind of a convention to put the
-			   system includes first */
+#include <stdio.h>      /* It's kind of a convention to put the
+         system includes first */
 
 /* https://github.com/schacon/cowsay/blob/master/cowsay */
 
@@ -17,21 +17,24 @@ extern optopt;
 extern optarg;
 extern opterr;
 
-char *getstr(optind, argc, argv, cow);
 
-VOID	init_cow(cow)
-cow_t	*cow;
+VOID init_cow(cow)
+cow_t *cow;
 {
-	cow->eyes = DEFAULT_EYES;
-	cow->tongue = DEFAULT_TONGUE;
-	cow->thoughts = DEFAULT_THOUGHTS;
-	cow->cowfile = NULL;
-	cow->wordwrap = 40;
+  cow->eyes = alloc(3);
+  cow->eyes = DEFAULT_EYES;
+  cow->tongue = alloc(3);
+  cow->tongue = DEFAULT_TONGUE;
+  cow->thoughts = alloc(3);
+  cow->thoughts = DEFAULT_THOUGHTS;
+  cow->cowfile = alloc(13);
+  cow->cowfile = DEFAULT_COWFILE;
+  cow->wordwrap = 40;
 }
 
-char	main(argc, argv)
-int	argc;
-char	*argv[];
+char main(argc, argv)
+int argc;
+char *argv[];
 {
   int c, lines, maxline;
   cow_t cow;
@@ -64,10 +67,6 @@ char	*argv[];
         break;
       case 'e':
         cow.eyes = (char *)optarg;
-        printf("-> %s\n", *cow.eyes);
-        printf("-> %-2s\n", *cow.eyes);
-        printf("-> %-2s\n", cow.eyes);
-        *cow.eyes = sprintf("%-2s", *cow.eyes);
         break;
       case 'T':
         cow.tongue = (char *)optarg;
@@ -79,10 +78,7 @@ char	*argv[];
         cow.wordwrap = -1;
         break;
       case 'f':
-/* BIG PROBLEM HERE. cow.cowfile is a pointer (two bytes). If you copy the
-   string argument into it then you're going to destroy the data structure */
-/*        strcpy(cow.cowfile, optarg); *** */
-	      cow.cowfile = (char *)optarg;
+          cow.cowfile = (char *)optarg;
         break;
       case 'l':
           listcowfiles();
@@ -104,10 +100,43 @@ char	*argv[];
   maxline = 0;
   strcnt(str, &lines, &maxline);
 
+#ifdef DEBUG
+  printf("Eyes: %s\n", cow.eyes);
+  printf("Tongue: %s\n", cow.tongue);
+  printf("File: %s\n", cow.cowfile);
+#endif  
+  if (!file_exist(cow.cowfile)) {
+    printf("cowsay: Could not find %s cowfile!\n", cow.cowfile);
+    exit(1);
+  }
   printstring(str, lines, maxline);
   printcow(&cow);
 
   exit(0);
+}
+
+char file_exist(file)
+char *file;
+{
+  FILE *fp;
+  char *cowpath;
+  char cowfile[64];
+  cowpath = getenv("COWPATH");
+  if (!strlen(cowpath)) {
+    puts("Cow path not set, use SET COWPATH= to set the path where the cow templates are.\n");
+    exit(1);
+  }
+
+  strcpy(cowfile, cowpath);
+  strcat(cowfile, "\\");
+  strcat(cowfile, file);
+  strcat(cowfile, ".cow");
+
+  if ((fp = fopen(cowfile, "r")) == NULL) {
+    return FALSE;
+  }
+  fclose(fp);
+  return TRUE;
 }
 
 char *getstr(optind, argc, argv, cow)

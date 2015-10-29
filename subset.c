@@ -79,15 +79,12 @@ int maxline;
 
 VOID listcowfiles()
 {
-  char *cowpath;
+  char *cowpath[64];
   char *cowpathFull[64];
   cowpath = getenv("COWPATH");
-/*  if (strlen(cowpath) == 0) {
-    *** just a matter of style, makes the comparison easier to see
- */
   if (!strlen(cowpath)) {
     puts("Cow path not set, use SET COWPATH= to set the path where the cow templates are.\n");
-    exit(0);
+    exit(1);
   }
   printf("Supported cows in %s :\n\n", cowpath);
   strcpy(cowpathFull, cowpath);
@@ -115,8 +112,6 @@ cow_t	*cow;
 {
 	FILE	*fp;
 	char	buf[256];
-/* 	char	*cowfile; *** You were strcpy()ing to a pointer, not to
-                              an actual memory buffer to hold the string */
 	char	*line;
 	char	cowfile[64];
 

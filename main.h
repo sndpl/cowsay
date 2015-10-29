@@ -9,3 +9,7 @@ struct cow_struct {
 };
 
 typedef struct cow_struct cow_t;
+
+char *getstr(optind, argc, argv, cow);
+char file_exist(file);
+VOID init_cow(cow);
