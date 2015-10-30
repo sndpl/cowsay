@@ -79,8 +79,8 @@ int maxline;
 
 VOID listcowfiles()
 {
-  char *cowpath[64];
-  char *cowpathFull[64];
+  char *cowpath;
+  char cowpathFull[64];
   cowpath = getenv("COWPATH");
   if (!strlen(cowpath)) {
     puts("Cow path not set, use SET COWPATH= to set the path where the cow templates are.\n");

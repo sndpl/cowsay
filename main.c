@@ -28,7 +28,7 @@ cow_t *cow;
   cow->thoughts = alloc(3);
   cow->thoughts = DEFAULT_THOUGHTS;
   cow->cowfile = alloc(13);
-  cow->cowfile = DEFAULT_COWFILE;
+  cow->cowfile = NULL;
   cow->wordwrap = 40;
 }
 
@@ -66,10 +66,18 @@ char *argv[];
         cow.eyes = YOUTHFUL_EYES;
         break;
       case 'e':
-        cow.eyes = (char *)optarg;
+        if(strlen(optarg)>2) {
+          cow.eyes = substr((char *)optarg, 0, 2);
+        } else {
+          cow.eyes = (char *)optarg;
+        }
         break;
       case 'T':
-        cow.tongue = (char *)optarg;
+        if(strlen(optarg)>2) {
+          cow.tongue = substr((char *)optarg, 0, 2);
+        } else {
+          cow.tongue = (char *)optarg;
+        }
         break;
       case 'W':
         cow.wordwrap = (int)optarg;
@@ -78,7 +86,11 @@ char *argv[];
         cow.wordwrap = -1;
         break;
       case 'f':
-          cow.cowfile = (char *)optarg;
+          if(strlen(optarg)>8) {
+            cow.cowfile = substr((char *)optarg, 0, 8);
+          } else {
+            cow.cowfile = (char *)optarg;
+          }
         break;
       case 'l':
           listcowfiles();
@@ -100,12 +112,7 @@ char *argv[];
   maxline = 0;
   strcnt(str, &lines, &maxline);
 
-#ifdef DEBUG
-  printf("Eyes: %s\n", cow.eyes);
-  printf("Tongue: %s\n", cow.tongue);
-  printf("File: %s\n", cow.cowfile);
-#endif  
-  if (!file_exist(cow.cowfile)) {
+  if (cow.cowfile != NULL && !file_exist(cow.cowfile)) {
     printf("cowsay: Could not find %s cowfile!\n", cow.cowfile);
     exit(1);
   }

@@ -1,6 +1,35 @@
 #include "string.h"
 #include <stdio.h>
 
+int strpos(haystack, needle)
+char *haystack;
+char *needle;
+{
+   char *p = strstr(haystack, needle);
+   if (p)
+      return p - haystack;
+   return -1;
+}
+
+char *substr(source, start, end)
+char *source;
+int start;
+int end;
+{
+  int len;
+  char *result = NULL;
+
+  if (start < 0 || end <= start || start > strlen(source) || end > strlen(source)) {
+     return FALSE;
+  } else {
+    len = end - start;
+    result = malloc(sizeof(char)*len+1);
+    memset (result, '\0', len+1);
+    strncpy(result, source+start, len);
+  }
+  return result;
+}
+
 VOID strrepeat(input, multiplier)
 char *input;
 int multiplier;

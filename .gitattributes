@@ -3,4 +3,5 @@
 *.c text eol=crlf
 *.h text eol=crlf
 *.bat text eol=crlf
+*.cow text eol=crlf
 
