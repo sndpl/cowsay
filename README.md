@@ -3,7 +3,7 @@
 This is a MSX-C version of cowsay.
 
 ## Usage #
-
+```
 cowsay [OPTION] ...  
 
 -b borg mode  
@@ -21,7 +21,7 @@ cowsay [OPTION] ...
 
 -h display this help and exit  
 -v output version information and exit  
-
+```
 e.g:
 
 ![](https://raw.githubusercontent.com/sndpl/cowsay/screenshots/screenshots/cowsay.png)
