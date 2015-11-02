@@ -1,6 +1,6 @@
 # Cowsay #
 
-This is a MSX-C version of cowsay.
+This is a MSX-C version of [cowsay](https://en.wikipedia.org/wiki/Cowsay).
 
 ## Usage #
 ```
