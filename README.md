@@ -22,11 +22,13 @@ cowsay [OPTION] ...
 -h display this help and exit  
 -v output version information and exit  
 
+e.g:
+
+![](https://raw.githubusercontent.com/sndpl/cowsay/screenshots/screenshots/cowsay.png)
+
 When no text is given the command will wait for text from the command line which can be ended with ```ctrl+Z```. It's also possible to pipe text into the cowsay program, e.g.:  
 
-```
-dir *.c | cowsay
-```
+![](https://raw.githubusercontent.com/sndpl/cowsay/screenshots/screenshots/cowsay_pipe_ex.png)
 
 ## Environment ##
 
